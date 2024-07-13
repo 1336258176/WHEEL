@@ -49,11 +49,11 @@ class myThread {
  public:
   template <typename Func, typename... Args>
     requires requires { !std::is_same_v<std::remove_cvref_t<Func>, myThread>; }
-  myThread(Func&& func, Args&&... args) {
+  explicit myThread(Func&& func, Args&&... args) {
     start(std::forward<Func>(func), std::forward<Args>(args)...);
   }
 
-  myThread() : id_{} {}
+  myThread() noexcept : id_{} {}
 
  private:
   using id = unsigned int;

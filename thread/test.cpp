@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 #include "myThread.hpp"
 
 void print_test(int num) {
@@ -18,6 +19,9 @@ void test(double& d) {
 }
 
 int main() {
+  std::cout << sizeof(std::thread) << '\n'; // MSVC: 16 Libstdc++: 8 实现不同
+  std::cout << sizeof(myThread) << '\n';
+
   myThread t{print_test, 1};
   myThread t2{ [] {
     std::cout << "lambda\n";
